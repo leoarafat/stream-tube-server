@@ -17,12 +17,53 @@ const client = new MongoClient(uri, {
   serverApi: ServerApiVersion.v1,
 });
 
-const songsCollection = client.db("catClicker").collection("cats");
+const songsCollection = client.db("catClicker").collection("songs");
+const moviesCollection = client.db("catClicker").collection("movies");
 
 async function catsRun() {
   try {
-    
-
+    //find songs
+    app.get("/songs", async (req, res) => {
+      const query = {};
+      const result = await songsCollection.find(query).toArray();
+      res.send(result);
+    });
+    //find songs with id
+    app.get("/songs/:id", async (req, res) => {
+      const id = req.params.id;
+      if (!ObjectId.isValid(id)) {
+        // check if id is a valid ObjectId
+        return res.status(400).send("Invalid ID.");
+      }
+      const query = { _id: new ObjectId(id) };
+      const result = await songsCollection.findOne(query);
+      if (!result) {
+        // handle case where no cat is found with the given ID
+        return res.status(404).send("Songs not found.");
+      }
+      res.send(result);
+    });
+    //find movies
+    app.get("/movies", async (req, res) => {
+      const query = {};
+      const result = await moviesCollection.find(query).toArray();
+      res.send(result);
+    });
+    //find movies with id
+    app.get("/movies/:id", async (req, res) => {
+      const id = req.params.id;
+      if (!ObjectId.isValid(id)) {
+        // check if id is a valid ObjectId
+        return res.status(400).send("Invalid ID.");
+      }
+      const query = { _id: new ObjectId(id) };
+      const result = await moviesCollection.findOne(query);
+      if (!result) {
+        // handle case where no cat is found with the given ID
+        return res.status(404).send("Movies not found.");
+      }
+      res.send(result);
+    });
   } catch (error) {
     console.log(error);
   }
