@@ -16,9 +16,11 @@ const client = new MongoClient(uri, {
   useUnifiedTopology: true,
   serverApi: ServerApiVersion.v1,
 });
-
+//data collection start
 const songsCollection = client.db("catClicker").collection("songs");
 const moviesCollection = client.db("catClicker").collection("movies");
+const trailerCollection = client.db("catClicker").collection("trailer");
+//data collection end
 
 async function catsRun() {
   try {
@@ -61,6 +63,27 @@ async function catsRun() {
       if (!result) {
         // handle case where no cat is found with the given ID
         return res.status(404).send("Movies not found.");
+      }
+      res.send(result);
+    });
+    //find Trailer
+    app.get("/trailer", async (req, res) => {
+      const query = {};
+      const result = await trailerCollection.find(query).toArray();
+      res.send(result);
+    });
+    //find trailer with id
+    app.get("/trailer/:id", async (req, res) => {
+      const id = req.params.id;
+      if (!ObjectId.isValid(id)) {
+        // check if id is a valid ObjectId
+        return res.status(400).send("Invalid ID.");
+      }
+      const query = { _id: new ObjectId(id) };
+      const result = await trailerCollection.findOne(query);
+      if (!result) {
+        // handle case where no cat is found with the given ID
+        return res.status(404).send("Trailer not found.");
       }
       res.send(result);
     });

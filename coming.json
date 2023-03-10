@@ -1,0 +1,54 @@
+[
+    {
+        "category": "Movie",
+        "title": "The Godfather (1972) trailer",
+        "thumbNail": "https://i.ytimg.com/vi/rocCoMduPXI/maxresdefault.jpg",
+        "videoLink": "",
+        "Views": 0,
+        "comment": 0,
+        "posted_date": "1",
+        "like": 0,
+        "dislike": 0,
+        "channel": "Yeasin Arafat",
+        "description": "Directed by Francis Ford Coppola, The Godfather is a classic crime drama film that follows the story of the Corleone family, a powerful Italian-American Mafia clan, as they navigate the criminal underworld of New York City in the 1940s. Starring Marlon Brando, Al Pacino, and James Caan, this film is widely regarded as one of the greatest movies ever made."
+    },
+    {
+        "category": "Movie",
+        "title": "The Shawshank Redemption (1994) Trailer",
+        "thumbNail": "https://i.ytimg.com/vi/QsNNbm9RBO0/maxresdefault.jpg",
+        "videoLink": "",
+        "Views": 0,
+        "comment": 0,
+        "posted_date": "1",
+        "like": 0,
+        "dislike": 0,
+        "channel": "Yeasin Arafat",
+        "description": "Directed by Frank Darabont, The Shawshank Redemption is a prison drama film that tells the story of Andy Dufresne, a banker who is sentenced to life in prison for a crime he didn't commit. Starring Tim Robbins and Morgan Freeman, this movie explores themes of hope, friendship, and redemption as Andy finds ways to survive and eventually escape from Shawshank prison."
+    },
+    {
+        "category": "Movie",
+        "title": "Inception (2010) Trailer",
+        "thumbNail": "https://c4.wallpaperflare.com/wallpaper/574/531/642/2010-inception-movie-inception-poster-wallpaper-thumb.jpg",
+        "videoLink": "",
+        "Views": 0,
+        "comment": 0,
+        "posted_date": "1",
+        "like": 0,
+        "dislike": 0,
+        "channel": "Yeasin Arafat",
+        "description": "Directed by Christopher Nolan, Inception is a mind-bending science fiction thriller that explores the idea of shared dreaming. Starring Leonardo DiCaprio, the movie follows a team of extractors who enter people's dreams to steal information. However, they soon find themselves in a dangerous mission to plant an idea in someone's mind instead."
+    },
+    {
+        "category": "Movie",
+        "title": "Forrest Gump (1994) Trailer",
+        "thumbNail": "https://material.asset.catchplay.com/PAR-IN-001-A0069/artworks/posters/PAR-IN-001-A0069-P1200.jpg?hash=1677210022",
+        "videoLink": "",
+        "Views": 0,
+        "comment": 0,
+        "posted_date": "1",
+        "like": 0,
+        "dislike": 0,
+        "channel": "Yeasin Arafat",
+        "description": "Directed by Robert Zemeckis, Forrest Gump is a heartwarming and emotional film that tells the story of a simple man named Forrest who becomes unwittingly involved in some of the most defining events of the 20th century. Starring Tom Hanks, the movie explores themes of love, friendship, and the power of perseverance as Forrest navigates through life with his childlike innocence and pure heart."
+    }
+]
