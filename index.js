@@ -19,7 +19,12 @@ const client = new MongoClient(uri, {
 //data collection start
 const songsCollection = client.db("catClicker").collection("songs");
 const moviesCollection = client.db("catClicker").collection("movies");
-const trailerCollection = client.db("catClicker").collection("trailer");
+const sharePostCollection = client.db("catClicker").collection("sharePost");
+const shareSongPostCollection = client.db("catClicker").collection("shareSong");
+const movieCommentCollection = client
+  .db("catClicker")
+  .collection("moviesComment");
+const songCommentCollection = client.db("catClicker").collection("songComment");
 //data collection end
 
 async function catsRun() {
@@ -66,25 +71,146 @@ async function catsRun() {
       }
       res.send(result);
     });
-    //find Trailer
-    app.get("/trailer", async (req, res) => {
-      const query = {};
-      const result = await trailerCollection.find(query).toArray();
+    //movie like
+    app.put("/movieLike/:id", async (req, res) => {
+      const id = req.params.id;
+      console.log(id);
+
+      const filter = { _id: new ObjectId(id) };
+      const options = { upsert: true };
+      const updateDoc = {
+        $inc: {
+          like: 1,
+        },
+      };
+      const result = await moviesCollection.updateOne(
+        filter,
+        updateDoc,
+        options
+      );
       res.send(result);
     });
-    //find trailer with id
-    app.get("/trailer/:id", async (req, res) => {
+    //movie view
+    app.put("/movieView/:id", async (req, res) => {
       const id = req.params.id;
-      if (!ObjectId.isValid(id)) {
-        // check if id is a valid ObjectId
-        return res.status(400).send("Invalid ID.");
+      // console.log(id);
+
+      const filter = { _id: new ObjectId(id) };
+      const options = { upsert: true };
+      const updateDoc = {
+        $inc: {
+          Views: 1,
+        },
+      };
+      const result = await moviesCollection.updateOne(
+        filter,
+        updateDoc,
+        options
+      );
+      res.send(result);
+    });
+    //songs like
+    app.put("/songLike/:id", async (req, res) => {
+      const id = req.params.id;
+      console.log(id);
+
+      const filter = { _id: new ObjectId(id) };
+      const options = { upsert: true };
+      const updateDoc = {
+        $inc: {
+          like: 1,
+        },
+      };
+      const result = await songsCollection.updateOne(
+        filter,
+        updateDoc,
+        options
+      );
+      res.send(result);
+    });
+    //songs view
+    app.put("/songView/:id", async (req, res) => {
+      const id = req.params.id;
+      console.log(id);
+
+      const filter = { _id: new ObjectId(id) };
+      const options = { upsert: true };
+      const updateDoc = {
+        $inc: {
+          Views: 1,
+        },
+      };
+      const result = await songsCollection.updateOne(
+        filter,
+        updateDoc,
+        options
+      );
+      res.send(result);
+    });
+    //movies comment
+    app.post("/moviesComment", async (req, res) => {
+      const user = req.body;
+      const result = await movieCommentCollection.insertOne(user);
+      console.log(result);
+      res.send(result);
+    });
+    // //songs comment
+    app.post("/songComment", async (req, res) => {
+      const user = req.body;
+      const result = await songCommentCollection.insertOne(user);
+      console.log(result);
+      res.send(result);
+    });
+    //get movie comment
+    app.get("/movieComment/:id", async (req, res) => {
+      const id = req.params.id;
+      const query = { postId: id };
+      const result = movieCommentCollection.find(query);
+      const cursor = await result.toArray();
+
+      res.send(cursor);
+    });
+    //get movie comment
+    app.get("/songComment/:id", async (req, res) => {
+      const id = req.params.id;
+      const query = { postId: id };
+      const result = songCommentCollection.find(query);
+      const cursor = await result.toArray();
+
+      res.send(cursor);
+    });
+
+    //share post
+    app.post("/sharePost", async (req, res) => {
+      const query = req.body;
+      const result = await sharePostCollection.insertOne(query);
+      res.send(result);
+    });
+    app.get("/sharePost", async (req, res) => {
+      let query = {};
+      if (req.query.email) {
+        query = {
+          email: req.query.email,
+        };
       }
-      const query = { _id: new ObjectId(id) };
-      const result = await trailerCollection.findOne(query);
-      if (!result) {
-        // handle case where no cat is found with the given ID
-        return res.status(404).send("Trailer not found.");
+      const cursor = sharePostCollection.find(query);
+      const result = await cursor.toArray();
+      res.send(result);
+    });
+    app.post("/shareSong", async (req, res) => {
+      const query = req.body;
+      const result = await shareSongPostCollection.insertOne(query);
+      res.send(result);
+    });
+    app.get("/shareSong", async (req, res) => {
+      let query = {};
+      if (req.query.email) {
+        query = {
+          email: req.query.email,
+        };
       }
+      const cursor = shareSongPostCollection.find(query);
+      const result = await cursor.toArray();
       res.send(result);
     });
   } catch (error) {
